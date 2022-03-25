@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Photos } = require('../../models');
 
 //GET /api/users
 router.get('/', (req, res) => {
@@ -21,7 +21,18 @@ router.get('/:id', (req, res) => {
         },
         where: {
             id: req.params.id
-        }   
+        },
+        include: [
+            {
+                model: Photos,
+                attributes: [
+                    'id',
+                    'title',
+                    'image-url',
+                    'created_at'
+                ]
+            }
+        ]   
     })
     .then(dbUserData => {
         if (!dbUserData) {
@@ -84,7 +95,11 @@ router.post('/login', (req, res) => {
         
             res.json({ user: dbUserData, message: 'You are now logged in!' });
         });
-    });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err)
+    })
 });
 
 //logout route
