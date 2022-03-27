@@ -38,7 +38,6 @@ User.init(
   phone_number:{
     type: DataTypes.INTEGER,
     allowNull: false,
-    // primaryKey: true,
     validate: {
       isDecimal: true
     }
