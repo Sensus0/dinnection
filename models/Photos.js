@@ -33,6 +33,7 @@ Photos.init(
                 key: 'id'
             }
         }
+        
     },
     {
         sequelize,
