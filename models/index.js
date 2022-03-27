@@ -1,6 +1,6 @@
 const User = require('./User');
 const Photo = require('./Photo')
-const Like = require('./Like');
+const Vote = require('./Vote');
 
 User.hasMany(Photo, {
     foreignKey: 'user_id'
@@ -11,31 +11,31 @@ Photo.belongsTo(User, {
 })
 
 User.belongsToMany(Photo, {
-    through: Like,
-    as: 'liked_posts',
+    through: Vote,
+    as: 'voted_posts',
     foreignKey: 'user_id'
 })
 
 Photo.belongsToMany(User, {
-    through: Like,
-    as: 'liked_posts',
+    through: Vote,
+    as: 'voted_posts',
     foreignKey: 'photo_id'
 })
 
-Like.belongsTo(User, {
+Vote.belongsTo(User, {
     foreignKey: 'user_id'
 })
 
-Like.belongsTo(Photo, {
+Vote.belongsTo(Photo, {
     foreignKey: 'photo_id'
 })
 
-User.hasMany(Like, {
+User.hasMany(Vote, {
     foreignKey: 'user_id'
 })
 
-Photo.hasMany(Like, {
+Photo.hasMany(Vote, {
     foreignKey: 'photo_id'
 })
 
-module.exports = { User, Photo, Like }
+module.exports = { User, Photo, Vote }

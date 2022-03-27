@@ -3,9 +3,9 @@ const sequelize = require('../config/connection');
 
 class Photo extends Model {
     static upvote(body, models) {
-        return models.Like.create({
+        return models.Vote.create({
             user_id: body.user_id,
-            photo_id: body.post_id
+            photo_id: body.photo_id
         }).then(() => {
             return Photo.findOne({
                 where: {
@@ -17,8 +17,8 @@ class Photo extends Model {
                     'title',
                     'created_at'
                     [
-                        sequelize.literal('(SELECT COUNT(*) FROM vote WHERE photo.id = like.photo_id)'),
-                        'like_count'
+                        sequelize.literal('(SELECT COUNT(*) FROM vote WHERE photo.id = vote.photo_id)'),
+                        'vote_count'
                     ]
                 ]
 
@@ -58,7 +58,7 @@ Photo.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'post'
+        modelName: 'photo'
     }
 )
 

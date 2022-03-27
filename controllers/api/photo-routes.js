@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Like, Photo, User } = require('../../models');
+const { Vote, Photo, User } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
@@ -8,10 +8,10 @@ router.get('/', (req, res) => {
   Photo.findAll({
     attributes: [
       'id',
-      'image_url',
       'title',
+      'image_url',
       'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE photo.id = like.photo_id)'), 'like_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE photo.id = vote.photo_id)'), 'vote_count']
     ],
     order: [['created_at', 'DESC']],
     include: [
@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:user_id', (req, res) => {
-  Photo.findOne({
+  Photo.findAll({
     where: {
       user_id: req.params.user_id
     },
@@ -37,7 +37,7 @@ router.get('/:user_id', (req, res) => {
       'image_url',
       'title',
       'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE photo.id = like.photo_id)'), 'like_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE photo.id = vote.photo_id)'), 'vote_count']
     ],
     include: [
       {
@@ -63,7 +63,8 @@ router.post('/', (req, res) => {
   Photo.create({
     title: req.body.title,
     image_url: req.body.image_url,
-    user_id: req.session.user_id
+    // req.session.user_id
+    user_id: req.body.user_id
   })
     .then(dbPhotoData => res.json(dbPhotoData))
     .catch(err => {
@@ -74,8 +75,9 @@ router.post('/', (req, res) => {
 
 router.put('/upvote', (req, res) => {
   // custom static method created in models/Photo.js
-  Photo.upvote({ ...req.body, user_id: req.session.user_id }, { User, Like })
-    .then(updatedLikeData => res.json(updatedLikeData))
+  //req.session.user_id
+  Photo.upvote(req.body,{ Vote })
+    .then(updatedVoteData => res.json(updatedVoteData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
