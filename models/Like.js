@@ -1,45 +1,40 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Photos extends Model {
-  checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
-  }
-}
+class Like extends Model {}
 
-Photos.init(
+//this is called a through table
+Like.init(
     {
         id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        image_url: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isURL: true
-            }
-        },
         user_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
                 model: 'user',
+                key: 'id'
+            }
+        },
+        photo_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                module: 'photo',
                 key: 'id'
             }
         }
     },
     {
         sequelize,
+        timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'post'
+        modelName: 'like'
     }
-)
+);
 
-module.exports = Photos;
+module.exports = Like;
