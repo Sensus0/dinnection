@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Photo, User, Vote } = require('../../models');
-const { bucketName, upload, getFileStream, uploadFile, s3 } = require('../../s3')
+const { bucketName, upload, getFileStream, uploadFile } = require('../../s3')
 
 // get all users
 router.get('/', (req, res) => {
@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
       'image',
       'bucket_name',
       'user_id',
+      'username',
       'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE photo.id = vote.photo_id)'), 'vote_count']
     ],
@@ -31,11 +32,11 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/list', async(req, res) => {
-  let response= await s3.listObjectsV2({Bucket: bucketName}).promise()
-  let keys= response.Contents.map(item=>item.Key)
-  res.send(keys)
-})
+// router.get('/list', async(req, res) => {
+//   let response= await s3.listObjectsV2({Bucket: bucketName}).promise()
+//   let keys= response.Contents.map(item=>item.Key)
+//   res.send(keys)
+// })
 
 router.get('/:key', (req, res) => {
   Photo.findOne({
@@ -48,6 +49,7 @@ router.get('/:key', (req, res) => {
           'image',
           'bucket_name',
           'user_id',
+          'username',
           'created_at'
       ]
   })
@@ -62,53 +64,21 @@ router.get('/:key', (req, res) => {
   })
 })
 
-//need a code to display the images
-router.get('/:user_id', (req, res) => {
-  Photo.findAll({
-    where: {
-      user_id: req.params.user_id
-    },
-    attributes: [
-      'image',
-      'key',
-      'user_id',
-      'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE photo.id = vote.photo_id)'), 'vote_count']
-    ],
-    include: [
-      {
-        model: User,
-        attributes: ['username']
-      }
-    ]
-  })
-    .then(dbPhotoData => {
-      if (!dbPhotoData) {
-        res.status(404).json({ message: 'No photo found with this id' });
-        return;
-      }
-      res.json(dbPhotoData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
 router.post('/upload', upload.single('photo'), async (req, res) => {
   const file = req.file
-  const obj = JSON.parse(JSON.stringify(req.body))
-  console.log("body:", obj)
   const result = await uploadFile(file)
-  console.log("file:", file)
-  console.log("result", result)
+  // console.log("session",req.session)
+  // console.log("file:", file)
+  // console.log("result", result)
   
   Photo.create({
       //used with option 3 (multer.memoryStorage option)
       // photo: req.file.buffer.toString('base64')
       key: req.file.filename,
       image: result.Location,
-      bucket_name: bucketName
+      bucket_name: bucketName,
+      user_id: req.session.user_id,
+      username: req.session.username
   })
   .then(dbImageData => {
       console.log("Successfully uploaded: " + dbImageData)
@@ -129,5 +99,38 @@ router.put('/upvote', (req, res) => {
       res.status(500).json(err);
     });
 });
+
+// //need a code to display the images
+// router.get('/:user_id', (req, res) => {
+//   Photo.findAll({
+//     where: {
+//       user_id: req.params.user_id
+//     },
+//     attributes: [
+//       'image',
+//       'key',
+//       'user_id',
+//       'created_at',
+//       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE photo.id = vote.photo_id)'), 'vote_count']
+//     ],
+//     include: [
+//       {
+//         model: User,
+//         attributes: ['username']
+//       }
+//     ]
+//   })
+//     .then(dbPhotoData => {
+//       if (!dbPhotoData) {
+//         res.status(404).json({ message: 'No photo found with this id' });
+//         return;
+//       }
+//       res.json(dbPhotoData);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
 
 module.exports = router;
