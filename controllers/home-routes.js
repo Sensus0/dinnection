@@ -13,16 +13,20 @@ router.get('/upload', (req, res) => {
     if (req.session.loggedIn) {
     res.render('upload')
     } else {
-    res.redirect('/signup')
+    res.redirect('/')
     }
 })
 
 router.get('/posts', (req, res) => {
-    Photo.findAll({})
-    .then((imageData) => {
-        const images = imageData.map((image) => image.get({ plain: true }))
-        console.log(images)
-        res.render("posts", { images })  
-    })
+    if (req.session.loggedIn) {
+        Photo.findAll({})
+        .then((imageData) => {
+            const images = imageData.map((image) => image.get({ plain: true }))
+            console.log(images)
+            res.render("posts", { images })  
+        })
+    } else {
+        res.redirect('/')
+    }
 });
 module.exports = router

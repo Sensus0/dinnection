@@ -1,6 +1,24 @@
-<div style="text-align: center;">
+{{!-- <div style="text-align: center;">
 {{#each images}}
     <p>{{username}}</p>
     <img height="400px" width="400px" src="http://localhost:3001/api/photos/{{key}}" />
 {{/each}}
+</div> --}}
+
+<div class="container">
+    <div class="row">
+        {{#each images}}
+        <div class="col s12 m6">
+            <div class="card medium">
+                <div class="card-image">
+                    <img class="responsive-img" src="http://localhost:3001/api/photos/{{key}}">
+                </div>                    
+                <div class="card-action">
+                    <h3>{{username}}</h3>
+                    <span class="right material-icons">favorite</span>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
 </div>
