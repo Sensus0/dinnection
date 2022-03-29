@@ -35,15 +35,19 @@ Photo.init(
             primaryKey: true,
             autoIncrement: true
         },
-        title: {
+        key: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        image_url: {
+        bucket_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        image: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isURL: true
+                isUrl: true
             }
         },
         user_id: {

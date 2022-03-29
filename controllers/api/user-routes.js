@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Photo } = require('../../models');
+const { User, Photo, Vote } = require('../../models');
 
 //GET /api/users
 router.get('/', (req, res) => {
@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
                 model: Photo,
                 attributes: [
                     'id',
-                    'title',
+                    'key',
                     'image_url',
                     'created_at'
                 ]
@@ -56,6 +56,7 @@ router.post('/', (req, res) => {
         phone_number: req.body.phone_number
     })
     .then(dbUserData => {
+        res.json(dbUserData);
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
