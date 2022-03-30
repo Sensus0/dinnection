@@ -15,7 +15,7 @@ async function loginFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace('/upload');
+            document.location.replace('/profile');
         } else {
             alert("Please check username and password");
         }
