@@ -100,37 +100,19 @@ router.put('/upvote', (req, res) => {
     });
 });
 
-// //need a code to display the images
-// router.get('/:user_id', (req, res) => {
-//   Photo.findAll({
-//     where: {
-//       user_id: req.params.user_id
-//     },
-//     attributes: [
-//       'image',
-//       'key',
-//       'user_id',
-//       'created_at',
-//       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE photo.id = vote.photo_id)'), 'vote_count']
-//     ],
-//     include: [
-//       {
-//         model: User,
-//         attributes: ['username']
-//       }
-//     ]
-//   })
-//     .then(dbPhotoData => {
-//       if (!dbPhotoData) {
-//         res.status(404).json({ message: 'No photo found with this id' });
-//         return;
-//       }
-//       res.json(dbPhotoData);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
+router.delete('/:id', (req, res) => {
+  Photo.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(dbImageData => {
+    res.json({
+      message: "Photo deleted from database!",
+      data: dbImageData
+    })
+  }).catch(err => {
+    res.status(500).json(err)
+  })
+})
 
 module.exports = router;
