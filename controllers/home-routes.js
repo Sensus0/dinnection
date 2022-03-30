@@ -17,6 +17,14 @@ router.get('/upload', (req, res) => {
     }
 })
 
+router.get('/profile', (req, res) => {
+    if (req.session.loggedIn) {
+    res.render('profile')
+    } else {
+    res.redirect('/signup')
+    }
+})
+
 router.get('/posts', (req, res) => {
     if (req.session.loggedIn) {
         Photo.findAll({})
