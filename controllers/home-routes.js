@@ -27,7 +27,9 @@ router.get('/profile', (req, res) => {
 
 router.get('/posts', (req, res) => {
     if (req.session.loggedIn) {
-        Photo.findAll({})
+        Photo.findAll({
+            order: [['created_at', 'DESC']],
+        })
         .then((imageData) => {
             const images = imageData.map((image) => image.get({ plain: true }))
             console.log(images)
