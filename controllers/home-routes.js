@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Photo } = require('../models')
+const { User } = require('../models')
 
 router.get('/signup', (req, res) => {
     res.render('signup')
@@ -23,6 +24,19 @@ router.get('/profile', (req, res) => {
     } else {
     res.redirect('/signup')
     }
+})
+router.get('/users/:id', (req, res) => {
+    User.findOne({
+       username: req.params.id
+       })
+       .then(dbUserData => {
+           const user = dbUserData.map((user) => user.get({ plain: true }))
+           res.render('profile', { user })
+         })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
 })
 
 router.get('/posts', (req, res) => {

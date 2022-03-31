@@ -4,17 +4,16 @@
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  left: 25px;
-  width: 100%;
-  float: left;
-  margin: auto;
-  text-align: center;
   padding: 16px;
+  margin: 25px;
   text-align: center;
   background-color: #f1f1f1;
+  object-fit: contain;
   }
-
+.card-image img {
+ object-fit: contain;
+ height: fit-content;
+}
 .card-content{
   text-align: center;
   font-weight: bold;
@@ -50,20 +49,5 @@ button:hover, a:hover {
 
 .container {
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.1);
-  align-items: center;
   text-align: center;
-  }
-
-  .column {
-    float: left;
-    width: 15%;
-    padding: 0 10px;
-  }
-
-  .row {margin: 0 -5px;}
-
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
   }
