@@ -18,6 +18,17 @@
 .card-content{
   text-align: center;
   font-weight: bold;
+  width: 100%;
+  }
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
   }
 
 .title {
@@ -52,6 +63,9 @@ button:hover, a:hover {
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.1);
   align-items: center;
   text-align: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
   }
 
   .column {
@@ -73,6 +87,13 @@ button:hover, a:hover {
     height: 300px;
     object-fit: cover;
     object-position: bottom;
+  }
+
+  
+  page-footer {
+  background-color: #000;
+
+  color: #049ac0;
   }
  
 
