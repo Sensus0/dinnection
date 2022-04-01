@@ -11,7 +11,8 @@ const secretAccessKey= process.env.AWS_SECRET_KEY
 const s3 = new aws.S3({
     region,
     accessKeyId,
-    secretAccessKey
+    secretAccessKey,
+    bucketName
 })
 
 function uploadFile(file) {
