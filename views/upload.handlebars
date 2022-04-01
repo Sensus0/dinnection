@@ -1,9 +1,18 @@
-<form method="POST" class="upload-form" action="/api/photos/upload" enctype="multipart/form-data">
-    <div>
-        <label for="photo">Select image:</label>
-        <input type="file" id="photo" name="photo" accept="image/*" />
+<div class="container">
+    <div class="row">
+         <div class="col l6 push-l3">
+             <form method="POST" class="upload-form card horizontal" action="/api/photos/upload" enctype="multipart/form-data">
+               {{!-- <div class="card horizontal center"> --}}
+                <div class="file-upload">
+                    <label for="photo">Select image:</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" />
+                </div>
+                <div class="right">
+                    <input type="submit" class="btn primary-btn">
+                </div>
+                {{!-- </div>    --}}
+            </form>    
+        </div>
     </div>
-    <div>
-        <input type="submit" class="btn primary-btn">
-    </div>
-</form>
+   
+</div>
