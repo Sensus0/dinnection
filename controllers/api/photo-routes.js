@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
       'id',
       'key',
       'image',
-      'bucket_name',
+      'Bucket',
       'user_id',
       'username',
       'created_at',
@@ -47,7 +47,7 @@ router.get('/:key', (req, res) => {
           'id',
           'key',
           'image',
-          'bucket_name',
+          'Bucket',
           'user_id',
           'username',
           'created_at'
@@ -76,7 +76,7 @@ router.post('/upload', upload.single('photo'), async (req, res) => {
       // photo: req.file.buffer.toString('base64')
       key: req.file.filename,
       image: result.Location,
-      bucket_name: bucketName,
+      Bucket: bucketName,
       user_id: req.session.user_id,
       username: req.session.username
   })

@@ -39,7 +39,7 @@ Photo.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        bucket_name: {
+        Bucket: {
             type: DataTypes.STRING,
             allowNull: false,
         },
