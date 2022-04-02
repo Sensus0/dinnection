@@ -3,6 +3,11 @@ const sequelize = require('../../config/connection');
 const { Photo, User, Vote } = require('../../models');
 const { bucketName, upload, getFileStream, uploadFile } = require('../../s3')
 
+//prevents images from storing in uploads file
+const fs = require('fs');
+const util = require('util');
+const unlinkFile = util.promisify(fs.unlink)
+
 // get all users
 router.get('/', (req, res) => {
   console.log('======================');
@@ -67,6 +72,7 @@ router.get('/:key', (req, res) => {
 router.post('/upload', upload.single('photo'), async (req, res) => {
   const file = req.file
   const result = await uploadFile(file)
+  await unlinkFile(file.path)
   // console.log("session",req.session)
   // console.log("file:", file)
   // console.log("result", result)
