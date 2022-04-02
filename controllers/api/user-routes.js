@@ -53,7 +53,8 @@ router.post('/', (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
-        phone_number: req.body.phone_number
+        job_title: req.body.job_title,
+        company_name: req.body.company_name
     })
     .then(dbUserData => {
         req.session.save(() => {

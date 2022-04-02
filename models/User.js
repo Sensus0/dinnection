@@ -35,12 +35,13 @@ User.init(
       len: [4]
     }
   },
-  phone_number:{
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    validate: {
-      isDecimal: true
-    }
+  job_title:{
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  company_name: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 },
 {
