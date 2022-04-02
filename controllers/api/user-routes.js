@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
                 attributes: [
                     'id',
                     'key',
-                    'image_url',
+                    'image',
                     'created_at'
                 ]
             }
