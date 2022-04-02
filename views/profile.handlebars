@@ -8,8 +8,9 @@
           <div class="row">
             <div class="col m12 l5">
         <div class="card">
+            {{#with user}}
             <img src="/css/images/pro1.jpg" alt="Alex" style="width:100%">
-            <h1>Alex Lee</h1>
+            <h1>{{username}}</h1>
             <p class="title">Front End Developer</p>
             <p>Columbia University</p>
                 <div style="margin: 24px 0;">
@@ -18,50 +19,26 @@
                     <a href="#"><i class="fa fa-github"></i></a> 
                 </div>
                 <p class="contact-btn"><button>Contact</button></p>
+            {{/with}}
         </div>
     </div>
-            <div class="col m12 l7">
-                <div class="card medium">
-                    <div class="card-image">
-                        <img class="" src="/css/images/post2.jpg">
-                    </div>
-                    <div class="card-action">
-                        <a href="#"><i class="fa fa-thumbs-up"></i></a>
-                        <a href="#"><i class="fa fa-thumbs-down"></i></a>
-                        <span class="right material-icons &#10084; ">favorite</span>
-                    </div>
-                </div>
-                <div class="card medium">
-                    <div class="card-image">
-                        <img class="responsive-img" src="/css/images/post3.jpg">
-                    </div>
-                    <div class="card-action">
-                        <a href="#"><i class="fa fa-thumbs-up"></i></a>
-                        <a href="#"><i class="fa fa-thumbs-down"></i></a>
-                        <span class="right material-icons &#10084; ">favorite</span>
-                    </div>
-                </div>
-                <div class="card medium">
-                    <div class="card-image">
-                        <img class="responsive-img" src="/css/images/post4.jpg">
-                    </div>
-                    <div class="card-action">
-                        <a href="#"><i class="fa fa-thumbs-up"></i></a>
-                        <a href="#"><i class="fa fa-thumbs-down"></i></a>
-                        <span class="right material-icons &#10084; ">favorite</span>
-                    </div>
-                </div>
-                <div class="card medium">
-                    <div class="card-image">
-                        <img class="responsive-img" src="/css/images/post5.jpg">
-                    </div>
-                    <div class="card-action">
-                        <a href="#"><i class="fa fa-thumbs-up"></i></a>
-                        <a href="#"><i class="fa fa-thumbs-down"></i></a>
-                        <span class="right material-icons &#10084; ">favorite</span>
-                    </div>
+            <div class="container">
+    <div class="row">
+        {{#each images}}
+        <div class="col s12 m6 l4">
+            <div class="card medium">
+                <div class="card-image ">
+                    <img class="responsive-image" src="http://localhost:3001/api/photos/{{key}}">
+                </div>                    
+                <div class="card-action">
+                    <h3> <span class="right material-icons">favorite</span></h3>
                 </div>
             </div>
+        </div>
+        {{/each}}
+    
+    </div>
+</div>
     </div>
     </div>
   
