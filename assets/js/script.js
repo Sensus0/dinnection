@@ -3,29 +3,82 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Sidenav.init(elems);
   });
 
-  let counterDisplayElem = document.querySelector('.counter-display');
-  let counterPlusElem = document.querySelector('.counter-plus');
-  
-  let count = 0;
+  function clickCounter() {
+    if (typeof(Storage) !== "undefined") {
+      if (localStorage.clickcount) {
+        localStorage.clickcount = Number(localStorage.clickcount)+1;
+      } else {
+        localStorage.clickcount = 1;
+      }
+      document.getElementById("result").innerHTML = "Likes " + localStorage.clickcount + " ";
+    } else {
+      document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+  }
 
-  updateDisplay();
+  function clickCounter1() {
+    if (typeof(Storage) !== "undefined") {
+      if (localStorage.clickcount) {
+        localStorage.clickcount = Number(localStorage.clickcount)+1;
+      } else {
+        localStorage.clickcount = 1;
+      }
+      document.getElementById("result1").innerHTML = "Likes " + localStorage.clickcount + " ";
+    } else {
+      document.getElementById("result1").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+  }
 
-  counterPlusElem.addEventListener("click",()=>{
-    count++;
-    updateDisplay();
-}) ;
+  function clickCounter2() {
+    if (typeof(Storage) !== "undefined") {
+      if (localStorage.clickcount) {
+        localStorage.clickcount = Number(localStorage.clickcount)+1;
+      } else {
+        localStorage.clickcount = 1;
+      }
+      document.getElementById("result2").innerHTML = "Likes " + localStorage.clickcount + " ";
+    } else {
+      document.getElementById("result2").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+  }
 
+  function clickCounter3() {
+    if (typeof(Storage) !== "undefined") {
+      if (localStorage.clickcount) {
+        localStorage.clickcount = Number(localStorage.clickcount)+1;
+      } else {
+        localStorage.clickcount = 1;
+      }
+      document.getElementById("result3").innerHTML = "Likes " + localStorage.clickcount + " ";
+    } else {
+      document.getElementById("result3").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+  }
 
+  function clickCounter4() {
+    if (typeof(Storage) !== "undefined") {
+      if (localStorage.clickcount) {
+        localStorage.clickcount = Number(localStorage.clickcount)+1;
+      } else {
+        localStorage.clickcount = 1;
+      }
+      document.getElementById("result4").innerHTML = "Likes " + localStorage.clickcount + " ";
+    } else {
+      document.getElementById("result4").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+  }
 
-
-
-function updateDisplay(){
-    counterDisplayElem.innerHTML = count;
-};
-  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-  // var collapsibleElem = document.querySelector('.collapsible');
-  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-
-  // Or with jQuery
-
+  function clickCounter5() {
+    if (typeof(Storage) !== "undefined") {
+      if (localStorage.clickcount) {
+        localStorage.clickcount = Number(localStorage.clickcount)+1;
+      } else {
+        localStorage.clickcount = 1;
+      }
+      document.getElementById("result5").innerHTML = "Likes " + localStorage.clickcount + " ";
+    } else {
+      document.getElementById("result5").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+  }
+ 
  
