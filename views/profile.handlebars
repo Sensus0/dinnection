@@ -2,7 +2,6 @@
 
 <h2 style="text-align:center">Welcome Back</h2>
 
-
 <main>
     <div class="container">
           <div class="row">
@@ -31,7 +30,8 @@
                     <img class="responsive-image" src="/api/photos/{{key}}">
                 </div>                    
                 <div class="card-action">
-                    <h3> <span class="right material-icons">favorite</span></h3>
+                    <h5><span onclick="clickCounter1()" >&#10084;</span></h5>
+                    <div id="result1"></div>  
                 </div>
             </div>
         </div>
@@ -41,7 +41,8 @@
 </div>
     </div>
     </div>
-  
+<script src="/js/profile.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </main>
 

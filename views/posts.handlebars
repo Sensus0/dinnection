@@ -14,10 +14,15 @@
                     <img class="responsive-image" src="/api/photos/{{key}}">
                 </div>                    
                 <div class="card-action">
-                    <h3>{{username}} <span class="right material-icons">favorite</span></h3>
+                    <h3>{{username}}</h3>
+                    <h5><span onclick="clickCounter1()" >&#10084;</span></h5>
+                    <div id="result1"></div>  
                 </div>
             </div>
         </div>
         {{/each}}
     </div>
 </div>
+
+<script src="/js/profile.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
